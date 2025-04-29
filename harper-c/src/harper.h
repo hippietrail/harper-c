@@ -14,6 +14,10 @@ typedef struct Document Document;
 typedef struct Lint Lint;
 typedef struct LintGroup LintGroup;
 
+
+// Get harper-core version
+char* harper_get_core_version();
+
 // Get harper-c version
 char* harper_get_lib_version();
 
