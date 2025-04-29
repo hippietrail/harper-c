@@ -49,6 +49,15 @@ pub extern "C" fn harper_free_document(doc: *mut Document) {
     }
 }
 
+/// Get Harper version from Cargo package
+#[no_mangle]
+pub extern "C" fn harper_get_version() -> *mut c_char {
+    match CString::new(env!("CARGO_PKG_VERSION")) {
+        Ok(cstr) => cstr.into_raw(),
+        Err(_) => ptr::null_mut(),
+    }
+}
+
 /// Gets the full text content of the document.
 /// Returns a newly allocated C string that must be freed by the caller using free().
 /// Returns NULL if the document is NULL or if memory allocation fails.

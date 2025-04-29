@@ -6,6 +6,7 @@ version = "0.1.0" # The current version of the package, following semantic versi
 edition = "2021" # The Rust edition to use; 2021 is the latest as of now
 
 [lib] # This section specifies settings related to the library
+name="harper"
 crate-type = ["cdylib"] # This tells Cargo to compile the library as a dynamic library (CDylib)
 # A CDylib is suitable for linking with C code, allowing C programs to call Rust functions.
 
