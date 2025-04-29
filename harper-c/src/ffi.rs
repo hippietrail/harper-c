@@ -49,9 +49,9 @@ pub extern "C" fn harper_free_document(doc: *mut Document) {
     }
 }
 
-/// Get Harper version from Cargo package
+/// Get harper-c version from Cargo package
 #[no_mangle]
-pub extern "C" fn harper_get_version() -> *mut c_char {
+pub extern "C" fn harper_get_lib_version() -> *mut c_char {
     match CString::new(env!("CARGO_PKG_VERSION")) {
         Ok(cstr) => cstr.into_raw(),
         Err(_) => ptr::null_mut(),
