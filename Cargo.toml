@@ -10,10 +10,7 @@ crate-type = ["cdylib"] # This tells Cargo to compile the library as a dynamic l
 # A CDylib is suitable for linking with C code, allowing C programs to call Rust functions.
 
 [dependencies] # This section lists the dependencies required by the package
-harper-core = { path = "../harper-core" } # This specifies a local dependency on the harper-core library
-# The path points to the location of the harper-core library, which is expected to be in the parent directory.
-# If harper-core were published on crates.io, you could specify it like this:
-# harper-core = "0.1.0"
+harper-core = "0.31.0" # This specifies a dependency on the harper-core library from crates.io
 
 [workspace] # This section is for workspace configuration
 # An empty workspace section indicates that this package is not part of a larger workspace.

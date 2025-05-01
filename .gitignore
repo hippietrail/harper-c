@@ -1,0 +1,28 @@
+# Rust
+target/
+**/*.rs.bk
+**/*.rs.bk.*
+**/*.rs.bk~*
+
+# C
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.dSYM/
+*.pdb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+Cargo.lock
