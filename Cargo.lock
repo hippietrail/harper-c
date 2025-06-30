@@ -365,9 +365,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "0.44.0"
+version = "0.46.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "968718f9d67fe394609ec5a1454ad6da6557dd2cc5b3b325f02ec9cf7dc7a3bb"
+checksum = "bf760cb603370cdf9747b42bcf8a95b7006a1bf55e7e17249573d985b52de732"
 dependencies = [
  "harper-pos-utils",
  "lazy_static",
@@ -385,9 +385,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "0.44.0"
+version = "0.46.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "feefcdccfe677da9dcc7fb73cbf1c15a106ac22cda4f87ea2ae1fe00ec975c13"
+checksum = "9b452cc35d30fb0f81af5178504f354c5ea01262dff77531bb89339809ad258e"
 dependencies = [
  "ammonia",
  "bitflags",
@@ -418,9 +418,9 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "0.44.0"
+version = "0.46.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b209fe1699d9f16d8400141fc5c9420373c1613110fd1b25167306ab4b6d1e5"
+checksum = "7401409bc768793027b3abe7322962f5ca1795acf443ba20ccc3bbd161e9aa4f"
 dependencies = [
  "hashbrown 0.15.4",
  "is-macro",
