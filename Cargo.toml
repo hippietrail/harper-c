@@ -10,7 +10,7 @@ crate-type = ["cdylib"] # This tells Cargo to compile the library as a dynamic l
 # A CDylib is suitable for linking with C code, allowing C programs to call Rust functions.
 
 [dependencies] # This section lists the dependencies required by the package
-harper-core = "0.46.0" # This specifies a dependency on the harper-core library from crates.io
+harper-core = "0.48.0" # This specifies a dependency on the harper-core library from crates.io
 
 [workspace] # This section is for workspace configuration
 # An empty workspace section indicates that this package is not part of a larger workspace.
