@@ -13,6 +13,7 @@ target/
 *.exe
 *.dSYM/
 *.pdb
+florb
 
 # IDE
 .vscode/

@@ -64,6 +64,15 @@ int32_t harper_get_lint_start(const Lint* lint);
 // Returns -1 on error
 int32_t harper_get_lint_end(const Lint* lint);
 
+// Get the number of suggestions for a lint
+// Returns -1 on error
+int32_t harper_get_suggestion_count(const Lint* lint);
+
+// Get the text of a specific suggestion for a lint
+// Returns a newly allocated string that must be freed by the caller using free()
+// Returns NULL on error
+char* harper_get_suggestion_text(const Lint* lint, int32_t index);
+
 #ifdef __cplusplus
 } // End of extern "C"
 #endif

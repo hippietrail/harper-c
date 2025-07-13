@@ -14,25 +14,25 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     
-    // Get and print document text
-    char* doc_text = harper_get_document_text(doc);
-    if (doc_text != NULL) {
-        printf("Document text: %s\n", doc_text);
-        free(doc_text);
-    }
+    // // Get and print document text
+    // char* doc_text = harper_get_document_text(doc);
+    // if (doc_text != NULL) {
+    //     printf("Document text: %s\n", doc_text);
+    //     free(doc_text);
+    // }
     
-    // Get and print token count
-    int32_t token_count = harper_get_token_count(doc);
-    printf("Token count: %d\n", token_count);
+    // // Get and print token count
+    // int32_t token_count = harper_get_token_count(doc);
+    // printf("Token count: %d\n", token_count);
     
-    // Print each token
-    for (int32_t i = 0; i < token_count; i++) {
-        char* token_text = harper_get_token_text(doc, i);
-        if (token_text != NULL) {
-            printf("Token %d: %s\n", i, token_text);
-            free(token_text);
-        }
-    }
+    // // Print each token
+    // for (int32_t i = 0; i < token_count; i++) {
+    //     char* token_text = harper_get_token_text(doc, i);
+    //     if (token_text != NULL) {
+    //         printf("Token %d: %s\n", i, token_text);
+    //         free(token_text);
+    //     }
+    // }
     
     // Create a lint group
     LintGroup* lint_group = harper_create_lint_group();
@@ -52,7 +52,18 @@ int main(int argc, char* argv[]) {
             if (message != NULL) {
                 const int32_t start = harper_get_lint_start(lints[i]);
                 const int32_t end = harper_get_lint_end(lints[i]);
-                printf("Lint %d: '%.*s' : %s\n", i, end - start, text + start, message);
+                const int32_t suggestion_count = harper_get_suggestion_count(lints[i]);
+                printf("Lint %d: '%.*s' : %s (suggestions: %d)\n", i, end - start, text + start, message, suggestion_count);
+                
+                // Print each suggestion
+                for (int32_t j = 0; j < suggestion_count; j++) {
+                    char* suggestion_text = harper_get_suggestion_text(lints[i], j);
+                    if (suggestion_text != NULL) {
+                        printf("  Suggestion %d: %s\n", j, suggestion_text);
+                        free(suggestion_text);
+                    }
+                }
+                
                 free(message);
             }
         }

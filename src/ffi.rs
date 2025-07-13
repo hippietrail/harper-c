@@ -221,3 +221,51 @@ pub extern "C" fn harper_get_lint_end(lint: *const Lint) -> c_int {
     let lint = unsafe { &*lint };
     lint.span.end as c_int
 }
+
+/// Gets the number of suggestions for a lint.
+/// Returns -1 if the lint is NULL.
+#[no_mangle]
+pub extern "C" fn harper_get_suggestion_count(lint: *const Lint) -> c_int {
+    if lint.is_null() {
+        return -1;
+    }
+
+    let lint = unsafe { &*lint };
+    lint.suggestions.len() as c_int
+}
+
+/// Gets the text of a specific suggestion for a lint.
+/// Returns a newly allocated string that must be freed by the caller using free().
+/// Returns NULL if the lint is NULL, the index is out of bounds, or if memory allocation fails.
+#[no_mangle]
+pub extern "C" fn harper_get_suggestion_text(lint: *const Lint, index: c_int) -> *mut c_char {
+    if lint.is_null() || index < 0 {
+        return ptr::null_mut();
+    }
+
+    let lint = unsafe { &*lint };
+    
+    if index as usize >= lint.suggestions.len() {
+        return ptr::null_mut();
+    }
+
+    let suggestion = &lint.suggestions[index as usize];
+    
+    // Convert the suggestion to a readable string
+    let suggestion_text = match suggestion {
+        harper_core::linting::Suggestion::ReplaceWith(chars) => {
+            format!("Replace with: \"{}\"", chars.iter().collect::<String>())
+        }
+        harper_core::linting::Suggestion::InsertAfter(chars) => {
+            format!("Insert \"{}\"", chars.iter().collect::<String>())
+        }
+        harper_core::linting::Suggestion::Remove => {
+            "Remove error".to_string()
+        }
+    };
+    
+    match CString::new(suggestion_text) {
+        Ok(cstr) => cstr.into_raw(),
+        Err(_) => ptr::null_mut(),
+    }
+}
