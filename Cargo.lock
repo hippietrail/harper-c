@@ -1012,7 +1012,7 @@ dependencies = [
  "cubecl-ir",
  "derive-new",
  "dirs",
- "foldhash",
+ "foldhash 0.1.5",
  "hashbrown 0.15.5",
  "log",
  "md5",
@@ -1415,6 +1415,12 @@ name = "foldhash"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
+
+[[package]]
+name = "foldhash"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 
 [[package]]
 name = "foreign-types"
@@ -1880,9 +1886,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "0.59.0"
+version = "0.61.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f03408ceeb7c0e30d26530167daf2093209d49fd53c1f3f641aecad496fffc5b"
+checksum = "563458b177a31bd9cd3c5ffc733927aa36b6c0eaa33a7b8e8d5740943db9dc9e"
 dependencies = [
  "harper-pos-utils",
  "lazy_static",
@@ -1900,18 +1906,18 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "0.59.0"
+version = "0.61.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ddf72b4fa97d30d9f195dafd433b254dc4b9910159733186e1c6f13917f61acf"
+checksum = "9e40c4273a8c5ae00521c814088143347258088c9f147da2a693ccbed3226af3"
 dependencies = [
  "ammonia",
  "bitflags 2.9.3",
  "blanket",
  "cached",
- "foldhash",
+ "foldhash 0.1.5",
  "fst",
  "harper-brill",
- "hashbrown 0.15.5",
+ "hashbrown 0.16.0",
  "is-macro",
  "itertools",
  "lazy_static",
@@ -1933,13 +1939,13 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "0.59.0"
+version = "0.61.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8a43656b77e0813dbbfaecf748aef53ebde03c1723d7249c2792655d8741927"
+checksum = "f30969bbf4c1b16e4cd2cce88e74adb143d5be1b295e4296e8a97e454f21910f"
 dependencies = [
  "burn",
  "burn-ndarray",
- "hashbrown 0.15.5",
+ "hashbrown 0.16.0",
  "is-macro",
  "itertools",
  "lru",
@@ -1967,7 +1973,19 @@ checksum = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
 dependencies = [
  "allocator-api2",
  "equivalent",
- "foldhash",
+ "foldhash 0.1.5",
+ "serde",
+]
+
+[[package]]
+name = "hashbrown"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5419bdc4f6a9207fbeba6d11b604d481addf78ecd10c11ad51e76c2f6482748d"
+dependencies = [
+ "allocator-api2",
+ "equivalent",
+ "foldhash 0.2.0",
  "serde",
 ]
 
@@ -3200,9 +3218,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.142"
+version = "1.0.143"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "030fedb782600dcbd6f02d479bf0d817ac3bb40d644745b769d6a96bc3afc5a7"
+checksum = "d401abef1d108fbd9cbaebc3e46611f4b1021f714a0597a71f41ee463f5f4a5a"
 dependencies = [
  "itoa",
  "memchr",
