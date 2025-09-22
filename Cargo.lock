@@ -1886,9 +1886,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "0.63.0"
+version = "0.64.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "54d2d321c5fe664fe7f8ccf30b72b1eae99f801426bd178b793da832d43221cb"
+checksum = "e31b5e429a779b0ff4876a6a5709de57f5ad59d44936964938084cd1fd3e37c6"
 dependencies = [
  "harper-pos-utils",
  "lazy_static",
@@ -1906,9 +1906,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "0.63.0"
+version = "0.64.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6f3710fa7fc347a3f29cb47c5e7cb46bd73c04a4de2c2f505ee32f7b72de663"
+checksum = "2a7cc599d24cbe83b77c53d5d5201e9a98f38becf6c495ce766985094716a935"
 dependencies = [
  "ammonia",
  "bitflags 2.9.3",
@@ -1939,9 +1939,9 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "0.63.0"
+version = "0.64.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58a699fb1276fa2c6017ddfb8da27ee4415c631d534be5c496eac537c5ec46f3"
+checksum = "ef5d170ae80a1d127f8115dea1cc54c5c041cf015ac97f2219bbb4a1aeddf1bb"
 dependencies = [
  "burn",
  "burn-ndarray",
@@ -2284,9 +2284,9 @@ checksum = "13dc2df351e3202783a1fe0d44375f7295ffb4049267b0f3018346dc122a1d94"
 
 [[package]]
 name = "lru"
-version = "0.16.0"
+version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86ea4e65087ff52f3862caff188d489f1fab49a0cb09e01b2e3f1a617b10aaed"
+checksum = "bfe949189f46fabb938b3a9a0be30fdd93fd8a09260da863399a8cf3db756ec8"
 dependencies = [
  "hashbrown 0.15.5",
 ]
@@ -3189,10 +3189,11 @@ checksum = "1bc711410fbe7399f390ca1c3b60ad0f53f80e95c5eb935e52268a0e2cd49acc"
 
 [[package]]
 name = "serde"
-version = "1.0.219"
+version = "1.0.226"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f0e2c6ed6606019b4e29e69dbaba95b11854410e5347d525002456dbbb786b6"
+checksum = "0dca6411025b24b60bfa7ec1fe1f8e710ac09782dca409ee8237ba74b51295fd"
 dependencies = [
+ "serde_core",
  "serde_derive",
 ]
 
@@ -3206,10 +3207,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "serde_derive"
-version = "1.0.219"
+name = "serde_core"
+version = "1.0.226"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b0276cf7f2c73365f7157c8123c21cd9a50fbbd844757af28ca1f5925fc2a00"
+checksum = "ba2ba63999edb9dac981fb34b3e5c0d111a69b0924e253ed29d83f7c99e966a4"
+dependencies = [
+ "serde_derive",
+]
+
+[[package]]
+name = "serde_derive"
+version = "1.0.226"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8db53ae22f34573731bafa1db20f04027b2d25e02d8205921b569171699cdb33"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3218,14 +3228,15 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.143"
+version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d401abef1d108fbd9cbaebc3e46611f4b1021f714a0597a71f41ee463f5f4a5a"
+checksum = "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
 dependencies = [
  "itoa",
  "memchr",
  "ryu",
  "serde",
+ "serde_core",
 ]
 
 [[package]]
