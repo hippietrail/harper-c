@@ -61,13 +61,9 @@ void harper_free_lints(Lint** lints, int32_t count);
 // Returns NULL on error
 char* harper_get_lint_message(const Lint* lint);
 
-// Get the start position of a lint in the document
-// Returns -1 on error
-int32_t harper_get_lint_start(const Lint* lint);
-
-// Get the end position of a lint in the document
-// Returns -1 on error
-int32_t harper_get_lint_end(const Lint* lint);
+// Get the range of a lint in the document
+// Sets start and end to -1 on error
+void harper_get_lint_range(const Lint* lint, int32_t* start, int32_t* end);
 
 // Get the number of suggestions for a lint
 // Returns -1 on error

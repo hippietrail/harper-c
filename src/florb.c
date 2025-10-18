@@ -4,6 +4,18 @@
 #include <stdlib.h>
 #include "harper.h" // Include the header file for the Rust library
 
+int lint_cmp(const void* a, const void* b) {
+    const Lint* lint_a = *(const Lint**)a;
+    const Lint* lint_b = *(const Lint**)b;
+    
+    int32_t start_a, start_b, scratch;
+
+    harper_get_lint_range(lint_a, &start_a, &scratch);
+    harper_get_lint_range(lint_b, &start_b, &scratch);
+
+    return start_a - start_b;
+}
+
 int main(int argc, char* argv[]) {
     char *version = harper_get_version();
     if (version != NULL) {
@@ -31,13 +43,18 @@ int main(int argc, char* argv[]) {
     // Get and print lints
     int32_t lint_count;
     Lint** lints = harper_get_lints(doc, lint_group, &lint_count);
+
     if (lints != NULL) {
+
+        // Lints are in a random order. Let's quicksort them by the `start` of each
+        qsort(lints, lint_count, sizeof(Lint*), lint_cmp);
+
         printf("%d lints:\n", lint_count);
         for (int32_t i = 0; i < lint_count; i++) {
             char* message = harper_get_lint_message(lints[i]);
             if (message != NULL) {
-                const int32_t start = harper_get_lint_start(lints[i]);
-                const int32_t end = harper_get_lint_end(lints[i]);
+                int32_t start, end;
+                harper_get_lint_range(lints[i], &start, &end);
                 const int32_t suggestion_count = harper_get_suggestion_count(lints[i]);
                 printf("Lint %d: '%.*s' : %s (suggestions: %d)\n", i, end - start, text + start, message, suggestion_count);
                 

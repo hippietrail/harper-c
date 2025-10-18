@@ -1,17 +1,17 @@
 // ffi.rs - Foreign Function Interface for Rust to C
 
 // Importing the necessary types from the standard library
-use std::os::raw::{c_int, c_char}; // This allows us to use C-compatible types
 use std::ffi::{CStr, CString}; // For handling C-compatible strings
+use std::os::raw::{c_char, c_int}; // This allows us to use C-compatible types
 use std::ptr;
 use std::sync::Arc;
 
 // Import some basic things from Harper
 use harper_core::{
-    Document,
+    core_version,
     linting::{Lint, LintGroup, Linter},
     spell::FstDictionary,
-    core_version,
+    Document,
 };
 
 /// Gets the version of the Harper Core library as a string.
@@ -42,7 +42,7 @@ pub extern "C" fn harper_create_document(text: *const c_char) -> *mut Document {
 
     // Create the document
     let doc = Document::new_plain_english_curated(text_str);
-    
+
     // Box the document and leak it to get a raw pointer
     Box::into_raw(Box::new(doc))
 }
@@ -69,7 +69,7 @@ pub extern "C" fn harper_get_document_text(doc: *const Document) -> *mut c_char 
 
     let doc = unsafe { &*doc };
     let text = doc.get_full_string();
-    
+
     match CString::new(text) {
         Ok(cstr) => cstr.into_raw(),
         Err(_) => ptr::null_mut(),
@@ -99,14 +99,14 @@ pub extern "C" fn harper_get_token_text(doc: *const Document, index: c_int) -> *
 
     let doc = unsafe { &*doc };
     let tokens = doc.get_tokens();
-    
+
     if index as usize >= tokens.len() {
         return ptr::null_mut();
     }
 
     let token = &tokens[index as usize];
     let text = doc.get_span_content_str(&token.span);
-    
+
     match CString::new(text) {
         Ok(cstr) => cstr.into_raw(),
         Err(_) => ptr::null_mut(),
@@ -149,20 +149,20 @@ pub extern "C" fn harper_get_lints(
 
     let doc = unsafe { &*doc };
     let lint_group = unsafe { &mut *lint_group };
-    
+
     let lints = lint_group.lint(doc);
-    
+
     // Convert Vec<Lint> to Vec<Box<Lint>>
     let boxed_lints: Vec<Box<Lint>> = lints.into_iter().map(Box::new).collect();
-    
+
     // Convert to raw pointers
     let mut raw_lints: Vec<*mut Lint> = boxed_lints.into_iter().map(Box::into_raw).collect();
-    
+
     // Set the count
     unsafe {
         *count = raw_lints.len() as c_int;
     }
-    
+
     // Return the array
     let result = raw_lints.as_mut_ptr();
     std::mem::forget(raw_lints); // Prevent deallocation
@@ -179,7 +179,7 @@ pub extern "C" fn harper_free_lints(lints: *mut *mut Lint, count: c_int) {
     unsafe {
         // Convert back to Vec
         let lints_vec = Vec::from_raw_parts(lints, count as usize, count as usize);
-        
+
         // Free each lint
         for lint in lints_vec {
             if !lint.is_null() {
@@ -200,35 +200,30 @@ pub extern "C" fn harper_get_lint_message(lint: *const Lint) -> *mut c_char {
 
     let lint = unsafe { &*lint };
     let message = lint.message.to_string();
-    
+
     match CString::new(message) {
         Ok(cstr) => cstr.into_raw(),
         Err(_) => ptr::null_mut(),
     }
 }
 
-/// Gets the start position of a lint in the document.
-/// Returns -1 if the lint is NULL.
+/// Gets the range of a lint in the document.
+/// Sets start and end to -1 if the lint is NULL.
 #[no_mangle]
-pub extern "C" fn harper_get_lint_start(lint: *const Lint) -> c_int {
+pub extern "C" fn harper_get_lint_range(lint: *const Lint, start: *mut c_int, end: *mut c_int) {
     if lint.is_null() {
-        return -1;
+        unsafe {
+            *start = -1;
+            *end = -1;
+        }
+        return;
     }
 
     let lint = unsafe { &*lint };
-    lint.span.start as c_int
-}
-
-/// Gets the end position of a lint in the document.
-/// Returns -1 if the lint is NULL.
-#[no_mangle]
-pub extern "C" fn harper_get_lint_end(lint: *const Lint) -> c_int {
-    if lint.is_null() {
-        return -1;
+    unsafe {
+        *start = lint.span.start as c_int;
+        *end = lint.span.end as c_int;
     }
-
-    let lint = unsafe { &*lint };
-    lint.span.end as c_int
 }
 
 /// Gets the number of suggestions for a lint.
@@ -253,13 +248,13 @@ pub extern "C" fn harper_get_suggestion_text(lint: *const Lint, index: c_int) ->
     }
 
     let lint = unsafe { &*lint };
-    
+
     if index as usize >= lint.suggestions.len() {
         return ptr::null_mut();
     }
 
     let suggestion = &lint.suggestions[index as usize];
-    
+
     // Convert the suggestion to a readable string
     let suggestion_text = match suggestion {
         harper_core::linting::Suggestion::ReplaceWith(chars) => {
@@ -268,11 +263,9 @@ pub extern "C" fn harper_get_suggestion_text(lint: *const Lint, index: c_int) ->
         harper_core::linting::Suggestion::InsertAfter(chars) => {
             format!("Insert \"{}\"", chars.iter().collect::<String>())
         }
-        harper_core::linting::Suggestion::Remove => {
-            "Remove error".to_string()
-        }
+        harper_core::linting::Suggestion::Remove => "Remove error".to_string(),
     };
-    
+
     match CString::new(suggestion_text) {
         Ok(cstr) => cstr.into_raw(),
         Err(_) => ptr::null_mut(),
