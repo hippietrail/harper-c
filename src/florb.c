@@ -5,6 +5,12 @@
 #include "harper.h" // Include the header file for the Rust library
 
 int main(int argc, char* argv[]) {
+    char *version = harper_get_version();
+    if (version != NULL) {
+        printf("Using Harper Core version: %s\n", version);
+        free(version);
+    }
+    
     const char* text = argc > 1 ? argv[1] : "Helloo ,Wrld!";
     
     // Create a document
@@ -13,26 +19,6 @@ int main(int argc, char* argv[]) {
         printf("Failed to create document\n");
         return 1;
     }
-    
-    // // Get and print document text
-    // char* doc_text = harper_get_document_text(doc);
-    // if (doc_text != NULL) {
-    //     printf("Document text: %s\n", doc_text);
-    //     free(doc_text);
-    // }
-    
-    // // Get and print token count
-    // int32_t token_count = harper_get_token_count(doc);
-    // printf("Token count: %d\n", token_count);
-    
-    // // Print each token
-    // for (int32_t i = 0; i < token_count; i++) {
-    //     char* token_text = harper_get_token_text(doc, i);
-    //     if (token_text != NULL) {
-    //         printf("Token %d: %s\n", i, token_text);
-    //         free(token_text);
-    //     }
-    // }
     
     // Create a lint group
     LintGroup* lint_group = harper_create_lint_group();

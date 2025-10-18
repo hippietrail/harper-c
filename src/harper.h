@@ -14,6 +14,11 @@ typedef struct Document Document;
 typedef struct Lint Lint;
 typedef struct LintGroup LintGroup;
 
+// Get the version of the Harper Core library
+// Returns a newly allocated string that must be freed by the caller using free()
+// Returns NULL on error
+char* harper_get_version(void);
+
 // Create a new document from plain English text
 // Returns NULL on error
 Document* harper_create_document(const char* text);

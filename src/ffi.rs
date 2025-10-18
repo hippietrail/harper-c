@@ -6,15 +6,24 @@ use std::ffi::{CStr, CString}; // For handling C-compatible strings
 use std::ptr;
 use std::sync::Arc;
 
-// Import something extremely basic and simple from Harper
+// Import some basic things from Harper
 use harper_core::{
     Document,
     linting::{Lint, LintGroup, Linter},
     spell::FstDictionary,
+    core_version,
 };
 
-// The `no_mangle` attribute prevents Rust from changing the name of this function,
-// making it easier for C to link to it.
+/// Gets the version of the Harper Core library as a string.
+/// Returns a newly allocated string that must be freed by the caller using free().
+#[no_mangle]
+pub extern "C" fn harper_get_version() -> *mut c_char {
+    match CString::new(core_version()) {
+        Ok(cstr) => cstr.into_raw(),
+        Err(_) => ptr::null_mut(),
+    }
+}
+
 /// Creates a new document from plain English text.
 /// Returns a pointer to the document, or null if there was an error.
 /// The caller is responsible for freeing the document using harper_free_document.
