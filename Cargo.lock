@@ -1524,7 +1524,7 @@ dependencies = [
  "libc",
  "option-ext",
  "redox_users",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -1695,7 +1695,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -2331,9 +2331,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "0.72.0"
+version = "0.73.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51d31e92d5e0a4ae6c7aa16c3e407242180ff526febdc1cb6a2b42bce0bebb77"
+checksum = "f7fc5aee7853a63ebf11e0fcdcf33096171579360a2b10e8506a167db0cc0fb9"
 dependencies = [
  "harper-pos-utils",
  "lazy_static",
@@ -2349,9 +2349,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "0.72.0"
+version = "0.73.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be3af5c69c3cc7862f50ea39dd3cae05ce31302250fe69edae30375c9e0765c5"
+checksum = "bb28d16a9f84d717b6beb60695bdf94a3488de2eba9027eb576d60c2075fc80c"
 dependencies = [
  "ammonia",
  "bitflags 2.10.0",
@@ -2383,9 +2383,9 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "0.72.0"
+version = "0.73.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "558c6bc60e4329f667d63dc52caf95bebc8922f693d540f1a1a9b3d11f9fe3e5"
+checksum = "db2c3117f835b72abc5b2c7c531426a534752c8c48edb0f60a8215039fda9ccf"
 dependencies = [
  "burn",
  "burn-ndarray",
@@ -2816,7 +2816,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "07033963ba89ebaf1584d767badaa2e8fcec21aedea6b8c0346d487d49c28667"
 dependencies = [
  "cfg-if",
- "windows-targets 0.52.6",
+ "windows-targets 0.53.5",
 ]
 
 [[package]]
@@ -3643,7 +3643,7 @@ dependencies = [
  "once_cell",
  "socket2",
  "tracing",
- "windows-sys 0.59.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -3965,7 +3965,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
