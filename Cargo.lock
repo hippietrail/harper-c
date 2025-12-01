@@ -2331,9 +2331,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "0.73.0"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7fc5aee7853a63ebf11e0fcdcf33096171579360a2b10e8506a167db0cc0fb9"
+checksum = "c518003c9dc5f29ac67f0f361b41446cd67f338ec431b175be72bfb8d8fdae03"
 dependencies = [
  "harper-pos-utils",
  "lazy_static",
@@ -2349,9 +2349,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "0.73.0"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bb28d16a9f84d717b6beb60695bdf94a3488de2eba9027eb576d60c2075fc80c"
+checksum = "b9cb1a5f2a2c01b80397d2e4670bfda98d9ac2ddc1c5d533e32c53d0585fdf62"
 dependencies = [
  "ammonia",
  "bitflags 2.10.0",
@@ -2360,7 +2360,7 @@ dependencies = [
  "foldhash 0.2.0",
  "fst",
  "harper-brill",
- "hashbrown 0.16.0",
+ "hashbrown 0.16.1",
  "is-macro",
  "itertools 0.14.0",
  "lazy_static",
@@ -2383,13 +2383,13 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "0.73.0"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db2c3117f835b72abc5b2c7c531426a534752c8c48edb0f60a8215039fda9ccf"
+checksum = "822d34b64754d088d1f19ac9102b5a838f82f74759c24647242df139674ce486"
 dependencies = [
  "burn",
  "burn-ndarray",
- "hashbrown 0.16.0",
+ "hashbrown 0.16.1",
  "is-macro",
  "lru",
  "rs-conllu",
@@ -2422,14 +2422,15 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.16.0"
+version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5419bdc4f6a9207fbeba6d11b604d481addf78ecd10c11ad51e76c2f6482748d"
+checksum = "841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100"
 dependencies = [
  "allocator-api2",
  "equivalent",
  "foldhash 0.2.0",
  "serde",
+ "serde_core",
 ]
 
 [[package]]
@@ -2904,7 +2905,7 @@ version = "0.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "96051b46fc183dc9cd4a223960ef37b9af631b55191852a8274bfef064cda20f"
 dependencies = [
- "hashbrown 0.16.0",
+ "hashbrown 0.16.1",
 ]
 
 [[package]]
