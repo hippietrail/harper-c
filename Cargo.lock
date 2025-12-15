@@ -2349,9 +2349,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "1.1.0"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c87fc7170caef3ec488ae0859655311c9d50483228b20af9278e616660fa72f"
+checksum = "660b3b9700963eec35afe6b9ea3e4c8967e4b60d08004a17d4282a37ad337b25"
 dependencies = [
  "ammonia",
  "bitflags 2.10.0",
@@ -4837,9 +4837,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-script"
-version = "0.5.7"
+version = "0.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9fb421b350c9aff471779e262955939f565ec18b86c15364e6bdf0d662ca7c1f"
+checksum = "383ad40bb927465ec0ce7720e033cb4ca06912855fc35db31b5755d0de75b1ee"
 
 [[package]]
 name = "unicode-segmentation"
