@@ -2349,9 +2349,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "1.6.0"
+version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b53c8e28e68493bd92d8e438ce54cb35f02052315e77237b72b5b6a639e887ef"
+checksum = "239ef7c965cf9ced23a3f617cdaa995ad2ac5b1f156ef637197ba711119ee45f"
 dependencies = [
  "ammonia",
  "bitflags 2.10.0",
@@ -2369,6 +2369,7 @@ dependencies = [
  "ordered-float 5.1.0",
  "paste",
  "pulldown-cmark",
+ "regex",
  "serde",
  "serde_json",
  "smallvec",
@@ -3827,9 +3828,9 @@ dependencies = [
 
 [[package]]
 name = "regex"
-version = "1.12.2"
+version = "1.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "843bc0191f75f3e22651ae5f1e72939ab2f72a4bc30fa80a066bd66edefc24d4"
+checksum = "e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276"
 dependencies = [
  "aho-corasick",
  "memchr",
