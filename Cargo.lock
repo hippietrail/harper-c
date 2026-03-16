@@ -2350,9 +2350,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "1.9.0"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba375e94288a99f4488432ce8a006e80681949247390cbd507d202588d11d106"
+checksum = "1ce208eff16bce8429903a578a9e32a9aaf9240be97582bec02e11463583a452"
 dependencies = [
  "ammonia",
  "bitflags 2.11.0",
@@ -2375,7 +2375,7 @@ dependencies = [
  "serde_json",
  "smallvec",
  "strum 0.28.0",
- "strum_macros",
+ "strum_macros 0.28.0",
  "thiserror 2.0.18",
  "trie-rs",
  "unicode-blocks",
@@ -2399,7 +2399,7 @@ dependencies = [
  "serde",
  "serde_json",
  "strum 0.27.2",
- "strum_macros",
+ "strum_macros 0.27.2",
 ]
 
 [[package]]
@@ -3574,9 +3574,9 @@ checksum = "3eb8486b569e12e2c32ad3e204dbaba5e4b5b216e9367044f25f1dba42341773"
 
 [[package]]
 name = "pulldown-cmark"
-version = "0.13.0"
+version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e8bbe1a966bd2f362681a44f6edce3c2310ac21e4d5067a6e7ec396297a6ea0"
+checksum = "83c41efbf8f90ac44de7f3a868f0867851d261b56291732d0cbf7cceaaeb55a6"
 dependencies = [
  "bitflags 2.11.0",
  "getopts",
@@ -4341,6 +4341,18 @@ name = "strum_macros"
 version = "0.27.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7695ce3845ea4b33927c055a39dc438a45b059f7c1b3d91d38d10355fb8cbca7"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "strum_macros"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab85eea0270ee17587ed4156089e10b9e6880ee688791d45a905f5b1ca36f664"
 dependencies = [
  "heck",
  "proc-macro2",
