@@ -2350,9 +2350,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "1.10.0"
+version = "1.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ce208eff16bce8429903a578a9e32a9aaf9240be97582bec02e11463583a452"
+checksum = "34596476caed60390b87a81e72f66dad4db466eb4a9aacf87589ff80448a9a8e"
 dependencies = [
  "ammonia",
  "bitflags 2.11.0",
