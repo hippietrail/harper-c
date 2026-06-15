@@ -2350,9 +2350,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "2.0.0"
+version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d35c9854dddb400d12f05978ceb371d2e9eba73d251acf9411874aa711a718d"
+checksum = "acab57352d953e0ab227d4a0a7a8f990e28053f47b8d633711677a83180f51fb"
 dependencies = [
  "ammonia",
  "bitflags 2.11.0",
@@ -2366,7 +2366,7 @@ dependencies = [
  "is-macro",
  "itertools 0.14.0",
  "levenshtein_automata",
- "lru",
+ "lru 0.18.0",
  "ordered-float 5.3.0",
  "paste",
  "pulldown-cmark",
@@ -2381,7 +2381,7 @@ dependencies = [
  "unicode-blocks",
  "unicode-script",
  "unicode-width 0.2.2",
- "zip 8.5.1",
+ "zip 8.6.0",
 ]
 
 [[package]]
@@ -2394,7 +2394,7 @@ dependencies = [
  "burn-ndarray",
  "hashbrown 0.16.1",
  "is-macro",
- "lru",
+ "lru 0.16.3",
  "rs-conllu",
  "serde",
  "serde_json",
@@ -2454,6 +2454,11 @@ name = "hashbrown"
 version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4f467dd6dccf739c208452f8014c75c18bb8301b050ad1cfb27153803edb0f51"
+dependencies = [
+ "allocator-api2",
+ "equivalent",
+ "foldhash 0.2.0",
+]
 
 [[package]]
 name = "heck"
@@ -2931,6 +2936,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1dc47f592c06f33f8e3aea9591776ec7c9f9e4124778ff8a3c3b87159f7e593"
 dependencies = [
  "hashbrown 0.16.1",
+]
+
+[[package]]
+name = "lru"
+version = "0.18.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a860605968fce16869fd239cf4237a82f3ac470723415db603b0e8b6c8d4fb9"
+dependencies = [
+ "hashbrown 0.17.0",
 ]
 
 [[package]]
@@ -4148,9 +4162,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.149"
+version = "1.0.150"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
+checksum = "e8014e44b4736ed0538adeecded0fce2a272f22dc9578a7eb6b2d9993c74cfb9"
 dependencies = [
  "itoa",
  "memchr",
@@ -5856,9 +5870,9 @@ dependencies = [
 
 [[package]]
 name = "zip"
-version = "8.5.1"
+version = "8.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dcab981e19633ebcf0b001ddd37dd802996098bc1864f90b7c5d970ce76c1d59"
+checksum = "2d04a6b5381502aa6087c94c669499eb1602eb9c5e8198e534de571f7154809b"
 dependencies = [
  "crc32fast",
  "flate2",
