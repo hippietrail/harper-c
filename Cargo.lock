@@ -260,6 +260,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "boxcar"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36f64beae40a84da1b4b26ff2761a5b895c12adc41dc25aaee1c4f2bbfe97a6e"
+
+[[package]]
 name = "bumpalo"
 version = "3.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2350,13 +2356,14 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "2.7.0"
+version = "2.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8a726636eab1d08a68aa3cac6113871a89b807998c448a11b7d90faaa97d61d"
+checksum = "2a0f1ba8f16a8b79a5dcbc092377e61029d6e12818a283727a5b232e4bdbceec"
 dependencies = [
  "ammonia",
  "bitflags 2.11.0",
  "blanket",
+ "boxcar",
  "cached",
  "foldhash 0.2.0",
  "fst",
