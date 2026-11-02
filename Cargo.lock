@@ -2338,9 +2338,9 @@ dependencies = [
 
 [[package]]
 name = "harper-brill"
-version = "2.0.0"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a731101fcae8c947d191c23b33eb60e10eba0af680d22dc1501285f8d3d91ad5"
+checksum = "dc30f9c4ce40d83ef9beef39126d803b9014ef8cc88581dca3a693b8eaf3586c"
 dependencies = [
  "harper-pos-utils",
  "serde_json",
@@ -2355,9 +2355,9 @@ dependencies = [
 
 [[package]]
 name = "harper-core"
-version = "2.13.0"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d88acd51ecd32aa6a7fcf1fd9f858bbbe507a935bcf31ddd833b454ae804a69"
+checksum = "f3e3c3af455f1325a03746c19efa0bbd60a2cf65da3fa93505e4ac675184ebda"
 dependencies = [
  "ammonia",
  "bitflags 2.11.0",
@@ -2369,10 +2369,11 @@ dependencies = [
  "harper-brill",
  "harper-thesaurus",
  "hashbrown 0.16.1",
+ "indexmap",
  "is-macro",
  "itertools 0.15.0",
  "levenshtein_automata",
- "lru 0.18.0",
+ "lru",
  "ordered-float 5.3.0",
  "paste",
  "pulldown-cmark",
@@ -2392,15 +2393,15 @@ dependencies = [
 
 [[package]]
 name = "harper-pos-utils"
-version = "2.0.0"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a8985773484108d430f76966f02b6d387d30c4e1b91d8969614e9e20e1d0679"
+checksum = "adf827c2f3ecd4a52077c86ff07e328cd34bca01acf09ea9054ab4ad077dc302"
 dependencies = [
  "burn",
  "burn-ndarray",
  "hashbrown 0.16.1",
  "is-macro",
- "lru 0.16.3",
+ "lru",
  "rs-conllu",
  "serde",
  "serde_json",
@@ -2410,13 +2411,13 @@ dependencies = [
 
 [[package]]
 name = "harper-thesaurus"
-version = "2.0.0"
+version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b89cc67949d648d8cb0fa774e7b3d2eb3dc1586b7f97faeb5a301af55e8cc6c"
+checksum = "ac00339e90c9ccf9bf2a7370bd6f7d11a3521b9eb861504260ea3f09428224c2"
 dependencies = [
  "hashbrown 0.16.1",
  "indexmap",
- "itertools 0.14.0",
+ "itertools 0.15.0",
  "ruzstd",
  "zstd",
 ]
@@ -2942,15 +2943,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "936de6c22f08e7135a921f8ada907acd0d88880c4f42b5591f634b9f1dd8e07f"
 dependencies = [
  "fid-rs",
-]
-
-[[package]]
-name = "lru"
-version = "0.16.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1dc47f592c06f33f8e3aea9591776ec7c9f9e4124778ff8a3c3b87159f7e593"
-dependencies = [
- "hashbrown 0.16.1",
 ]
 
 [[package]]
@@ -4066,9 +4058,9 @@ checksum = "eded382c5f5f786b989652c49544c4877d9f015cc22e145a5ea8ea66c2921cd2"
 
 [[package]]
 name = "ruzstd"
-version = "0.8.2"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5ff0cc5e135c8870a775d3320910cd9b564ec036b4dc0b8741629020be63f01"
+checksum = "69e4ce4a039f42bf25920b95667e4d789e98749ab11bbb8d2c2936f788421bb5"
 dependencies = [
  "twox-hash",
 ]
@@ -5923,27 +5915,27 @@ dependencies = [
 
 [[package]]
 name = "zstd"
-version = "0.13.3"
+version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a"
+checksum = "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70"
 dependencies = [
  "zstd-safe",
 ]
 
 [[package]]
 name = "zstd-safe"
-version = "7.2.4"
+version = "8.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d"
+checksum = "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b"
 dependencies = [
  "zstd-sys",
 ]
 
 [[package]]
 name = "zstd-sys"
-version = "2.0.16+zstd.1.5.7"
+version = "2.1.2+zstd.1.5.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "91e19ebc2adc8f83e43039e79776e3fda8ca919132d68a1fed6a5faca2683748"
+checksum = "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3"
 dependencies = [
  "cc",
  "pkg-config",
