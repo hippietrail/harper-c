@@ -1,17 +1,14 @@
-# Cargo.toml - Configuration file for the Rust library project
+[workspace]
+resolver = "2"
+members = [
+    "crates/harper-raw",
+    "crates/harper-safe",
+]
 
-[package] # This section defines the package metadata
-name = "harper-c" # The name of the package, used when publishing or building
-version = "0.1.0" # The current version of the package, following semantic versioning
-edition = "2021" # The Rust edition to use; 2021 is the latest as of now
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
 
-[lib] # This section specifies settings related to the library
-crate-type = ["cdylib"] # This tells Cargo to compile the library as a dynamic library (CDylib)
-# A CDylib is suitable for linking with C code, allowing C programs to call Rust functions.
-
-[dependencies] # This section lists the dependencies required by the package
-harper-core = "3.0.0" # This specifies a dependency on the harper-core library from crates.io
-
-[workspace] # This section is for workspace configuration
-# An empty workspace section indicates that this package is not part of a larger workspace.
-# This allows users to build this example independently without needing to modify or include other packages.
+[workspace.dependencies]
+harper-core = "3.2.0"
+slotmap = "1.0"

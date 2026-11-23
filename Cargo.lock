@@ -2347,13 +2347,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "harper-c"
-version = "0.1.0"
-dependencies = [
- "harper-core",
-]
-
-[[package]]
 name = "harper-core"
 version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2407,6 +2400,21 @@ dependencies = [
  "serde_json",
  "strum",
  "strum_macros",
+]
+
+[[package]]
+name = "harper-raw"
+version = "0.2.0"
+dependencies = [
+ "harper-core",
+]
+
+[[package]]
+name = "harper-safe"
+version = "0.2.0"
+dependencies = [
+ "harper-core",
+ "slotmap",
 ]
 
 [[package]]

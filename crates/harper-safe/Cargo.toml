@@ -1,0 +1,11 @@
+[package]
+name = "harper-safe"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+harper-core.workspace = true
+slotmap.workspace = true
