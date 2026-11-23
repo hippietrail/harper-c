@@ -1,0 +1,10 @@
+[package]
+name = "harper-raw"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+harper-core.workspace = true

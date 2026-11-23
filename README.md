@@ -1,172 +1,97 @@
 # Example Harper C Bindings
 
-An example of a C interface for the Harper grammar checking library, built in Rust.
+An educational repository illustrating two contrasting approaches to building a C Foreign Function Interface (FFI) for the [Harper](https://github.com) grammar-checking library (`harper-core`) in Rust.
 
-This project is intended to help illustrate how to:
-- Make a C interface for a Rust library.
-- Use the Harper library.
+![Florb vs. Krenth — Raw Pointers & Zero-Copy Slices vs. Generational Handles](docs/florb-vs-krenth.jpg)
+
+## Two FFI Designs Side-by-Side
+
+This Cargo workspace provides two independent C dynamic libraries (`cdylib`) wrapping `harper-core`, along with matching C example programs:
+
+| Crate | Header | C Example | Design Philosophy | Trade-offs |
+| :--- | :--- | :--- | :--- | :--- |
+| **`harper-raw`** | `examples/harper_raw.h` | `examples/florb.c` | **Raw pointers & zero-copy slices (`HarperSlice`)** pointing directly into Rust memory. | Maximum speed & zero string copies, but C must strictly obey lifetime rules (no use-after-free) and call `harper_raw_free_*` destructors. |
+| **`harper-safe`** | `examples/harper_safe.h` | `examples/krenth.c` | **Generational `SlotMap` handles (`HarperDoc`, `HarperLint`, ...)** + caller-owned string buffers. | Immune to use-after-free, double-free, and wrong-type handles in C, at the cost of `Mutex` lookups and string copies. |
+
+---
+
+## Repository Layout
+
+```text
+harper-c/
+├── Cargo.toml                  # Cargo workspace root
+├── Makefile                    # Builds both Rust dylibs and compiles/runs florb & krenth
+├── crates/
+│   ├── harper-raw/             # Raw pointer & zero-copy slice FFI (cdylib)
+│   └── harper-safe/            # Generational handle-pool FFI (cdylib)
+└── examples/
+    ├── harper_raw.h            # C header for harper-raw
+    ├── florb.c                 # Example consumer for harper-raw
+    ├── harper_safe.h           # C header for harper-safe
+    └── krenth.c                # Example consumer for harper-safe
+```
+
+---
 
 ## Building and Running
 
-1. Build the Rust library:
+### Quick Start (with `make`)
+
+The included `Makefile` automatically detects your Cargo `target-directory` (including custom `target-dir` paths in `.cargo/config.toml`), builds both Rust libraries, and compiles and executes both C examples:
+
+```bash
+make all      # Build and run both florb and krenth
+make florb    # Build and run only the raw/zero-copy example
+make krenth   # Build and run only the safe handle-pool example
+```
+
+### Manual Build
+
+1. **Build the Rust workspace:**
    ```bash
    cargo build --release
    ```
 
-2. Compile your C code:
+2. **Compile and run `florb` (`harper-raw`):**
    ```bash
-   cc your_program.c -L target/release -lharper_c -o your_program
-   ```
-
-3. From a Bash, Zsh, etc. shell:
-
-   ```bash
+   cc -std=c11 examples/florb.c -Iexamples -Ltarget/release -lharper_raw -Wl,-rpath,target/release -o florb
    ./florb "Plz chek for a error ."
-
-   Using Harper Core version: 0.67.0
-   4 lints:
-   Lint 0: 'a' : Incorrect indefinite article. (suggestions: 1)
-     Suggestion 0: Replace with: "an"
-   Lint 1: ' ' : Unnecessary space at the end of the sentence. (suggestions: 1)
-     Suggestion 0: Remove error
-   Lint 2: 'Plz' : Did you mean to spell `Plz` this way? (suggestions: 3)
-     Suggestion 0: Replace with: "Pl"
-     Suggestion 1: Replace with: "P's"
-     Suggestion 2: Replace with: "Pb"
-   Lint 3: 'chek' : Did you mean to spell `chek` this way? (suggestions: 3)
-     Suggestion 0: Replace with: "chew"
-     Suggestion 1: Replace with: "check"
-     Suggestion 2: Replace with: "cheek"
    ```
 
-## API Reference
+3. **Compile and run `krenth` (`harper-safe`):**
+   ```bash
+   cc -std=c11 examples/krenth.c -Iexamples -Ltarget/release -lharper_safe -Wl,-rpath,target/release -o krenth
+   ./krenth "Plz chek for a error ."
+   ```
 
-### Document Management
-- `Document* harper_create_document(const char* text)` - Create document from text
-- `void harper_free_document(Document* doc)` - Free a document
-- `char* harper_get_document_text(const Document* doc)` - Get document text (free with `free()`)
-- `int32_t harper_get_token_count(const Document* doc)` - Get token count
-- `char* harper_get_token_text(const Document* doc, int32_t index)` - Get token text (free with `free()`)
+---
 
-### Linting
-- `LintGroup* harper_create_lint_group(void)` - Create a lint group
-- `void harper_free_lint_group(LintGroup* group)` - Free a lint group
-- `Lint** harper_get_lints(const Document* doc, LintGroup* group, int32_t* count)` - Get lints
-- `void harper_free_lints(Lint** lints, int32_t count)` - Free lints array
+## Example Output
 
-### Lint Information
-- `char* harper_get_lint_message(const Lint* lint)` - Get lint message (free with `free()`)
-- `int32_t harper_get_lint_start(const Lint* lint)` - Get start position
-- `int32_t harper_get_lint_end(const Lint* lint)` - Get end position
-- `int32_t harper_get_suggestion_count(const Lint* lint)` - Get number of suggestions
-- `char* harper_get_suggestion_text(const Lint* lint, int32_t index)` - Get suggestion text (free with `free()`)
+Running `krenth`:
 
-### Version
-- `char* harper_get_version(void)` - Get Harper Core version (free with `free()`)
-
-## Example
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include "harper.h"
-
-int main() {
-    char* version = harper_get_version();
-    printf("Using Harper Core version: %s\n", version);
-    free(version);
-    
-    Document* doc = harper_create_document("Example text");
-    // ... use the document ...
-    harper_free_document(doc);
-    return 0;
-}
+```text
+Using Harper Core version: 3.2.0
+3 lints:
+Lint 0: 'Helloo' : Did you mean to spell `Helloo` this way? (suggestions: 3)
+  Suggestion 0: Replace with: "Hello"
+  Suggestion 1: Replace with: "Halloo"
+  Suggestion 2: Replace with: "Hellos"
+Lint 1: ' ,' : Don't use a space before a comma. Use a space after a comma. (suggestions: 1)
+  Suggestion 0: Replace with: ", "
+Lint 2: 'Wrld' : Did you mean to spell `Wrld` this way? (suggestions: 3)
+  Suggestion 0: Replace with: "Weld"
+  Suggestion 1: Replace with: "Wild"
+  Suggestion 2: Replace with: "World"
+Double-free doc result: false (safely ignored)
+Stale doc token count: -1
 ```
 
-## Memory Management
-- All functions that return `char*` must be freed with `free()`
-- Check for `NULL` return values to detect errors
-- Free all allocated resources to prevent memory leaks
+---
 
-## Example Code
+## Key FFI Lessons Illustrated
 
-The example (`src/florb.c`) demonstrates basic usage of the Harper library:
-
-1. Creating a document from text
-2. Getting the document's text content
-3. Getting token information
-4. Proper memory management
-
-## API Reference
-
-The C API is defined in [src/harper.h](cci:7://file:///Users/hippietrail/harper/harper-c/src/harper.h:0:0-0:0):
-
-
-
-
-
-
-
-
-
-
-
-
-
-- `harper_create_document(text)`: Create a new document from text
-
-
-
-
-- `harper_free_document(doc)`: Free a document
-
-
-
-- `harper_get_document_text(doc)`: Get the full text of a document
-
-
-
-- `harper_get_token_count(doc)`: Get the number of tokens in a document
-
-
-
-- `harper_get_token_text(doc, index)`: Get the text of a specific token
-
-
-
-- `harper_create_lint_group()`: Create a new lint group
-
-
-
-- `harper_free_lint_group(lint_group)`: Free a lint group
-
-
-
-- `harper_get_lints(doc, lint_group, count)`: Get all lints for a document
-
-
-
-- `harper_free_lints(lints, count)`: Free an array of lints
-
-
-
-- `harper_get_lint_message(lint)`: Get the message for a lint
-
-
-
-- `harper_get_lint_start(lint)`: Get the start position of a lint
-
-
-
-- `harper_get_lint_end(lint)`: Get the end position of a lint
-
-## Memory Management
-- Documents created with `harper_create_document` must be freed with `harper_free_document`
-- Lint groups created with `harper_create_lint_group` must be freed with `harper_free_lint_group`
-- Lints created with `harper_get_lints` must be freed with `harper_free_lints`
-- Strings returned by `harper_get_document_text`, `harper_get_token_text`, and `harper_get_version` must be freed with `free()`
-
-## Error Handling
-- Functions that return pointers return `NULL` on error
-- Functions that return integers return `-1` on error
-- Always check return values for errors
+* **Never call C's `free()` on Rust memory:** Rust's allocator may differ from libc's `malloc`/`free`. `harper-raw` exposes `harper_raw_free_string()`, while `harper-safe` writes into caller-provided C buffers so Rust never hands out raw heap pointers at all.
+* **Zero-copy slices vs. owned buffers:** `HarperSlice { const char* ptr; size_t len; }` avoids allocations for static strings and lint messages, but is **not null-terminated** (print with `%.*s`) and becomes a dangling pointer as soon as its parent `Lint` is freed.
+* **Generational handles (`slotmap`):** Packing a slot index and generation counter into an opaque `uint64_t` struct (`HarperDoc`, `HarperLint`) gives C compile-time type checking between handle kinds and runtime protection against stale or double-freed handles.
+* **Character offsets vs. UTF-8 byte offsets:** `harper-core` spans use Unicode scalar (`char`) indices, not UTF-8 byte offsets. Both crates provide `*_get_lint_text()` helpers so C code never slices multi-byte UTF-8 characters mid-codepoint.
